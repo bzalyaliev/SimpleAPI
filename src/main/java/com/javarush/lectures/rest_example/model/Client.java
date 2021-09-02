@@ -1,10 +1,40 @@
 package com.javarush.lectures.rest_example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "clients")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Client {
+
+    /*@Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    @Id
+    @Column(name = "id")
+    @SequenceGenerator(name = "clientsIdSeq", sequenceName = "clients_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clientsIdSeq")
     private Integer id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+
+
+
+
+    /*private Integer id;
     private String name;
     private String email;
-    private String phone;
+    private String phone;*/
 
     public Integer getId() {
         return id;
@@ -37,4 +67,5 @@ public class Client {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 }
